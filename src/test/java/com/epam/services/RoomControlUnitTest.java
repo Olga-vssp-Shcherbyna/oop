@@ -43,6 +43,7 @@ public class RoomControlUnitTest {
         addDevice(house, "Library", "type", 0, "on");
     }
 
+
     //switchDevice tests
     @Test
     public void shouldReturnNoRoomMessage(){

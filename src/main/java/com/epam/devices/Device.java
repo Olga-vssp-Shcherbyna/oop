@@ -11,6 +11,7 @@ public abstract class Device {
     public abstract String getType();
     public abstract void setState(String state);
 
+
     @Override
     public String toString(){
         return "State = "+this.getState()+", power = "+this.getPower();

@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class HouseControlUnit {
 
 
+
     //method for room addition
     public static Room addRoom(House house, int numberOfFreeSockets, String name) {
         if (RoomControlUnit.getRoomByName(house, name)==null) {
@@ -61,7 +62,7 @@ public class HouseControlUnit {
         String position;
         Device deviceReturnable = null;
         ArrayList<Device> devices = getAllDevices(house);
-        if (power1<power2||power2>=0||power1>=0)
+        if (power1<power2&&power2>=0&&power1>=0)
             for (Device device:devices) {
                 if ((device.getPower() > power1) && (device.getPower() < power2) &&
                         (device.getState().equalsIgnoreCase(state)) && (device.getType().equalsIgnoreCase(type))) {
@@ -69,8 +70,8 @@ public class HouseControlUnit {
                     System.out.println(position);
                     deviceReturnable = device;
                 }
-        else System.out.println("Wrong power range");
             }
+        else System.out.println("Wrong power range");
         return deviceReturnable;
     }
     //method for getting device by position
@@ -98,7 +99,7 @@ public class HouseControlUnit {
     }
 
     public static void printDevices (ArrayList<Device> devices){
-        System.out.print("[ ");
+        System.out.println("[ ");
         for (Device device : devices){
             System.out.println(device.toString());
         }

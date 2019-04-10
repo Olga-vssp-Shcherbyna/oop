@@ -10,7 +10,7 @@
 | ND - add new device to room     |
 | RD - remove device from room    |
 | SD - switch device              |
-| SORT - sort devices in house     |
+| SORT - sort devices in house    |
 | DP - display power consumption  |
 | EXIT - exit                     |
  ---------------------------------

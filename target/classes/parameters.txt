@@ -8,10 +8,6 @@ Bedroom
 Kitchen
 Library
 PC
-12
-on
-Library
-PC
 5
 off
 Bathroom

@@ -19,6 +19,7 @@ public class House{
             return INSTANCE;
             }
 
+
         //getter for list of rooms in house
         public ArrayList<Room> getRooms() {
             return rooms;

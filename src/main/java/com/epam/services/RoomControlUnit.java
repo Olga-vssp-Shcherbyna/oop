@@ -39,6 +39,7 @@ public class RoomControlUnit {
         else System.out.println("There is no such room");
     }
 
+
     //method for switching device
     public static void switchDevice(House house, String roomName, int id, String type){
         Room room = RoomControlUnit.getRoomByName(house, roomName);
@@ -73,8 +74,10 @@ public class RoomControlUnit {
             }
             if (device != null) {
                 room.setNumberOfFreeSockets(room.getNumberOfFreeSockets() + 1);
-                if (device.getBooleanState())
+                if (device.getBooleanState()) {
                     room.setRoomPower(room.getRoomPower() - device.getPower());
+                    house.setTotalPower(house.getTotalPower()-device.getPower());
+                }
                 room.getDevices().remove(device);
                 device.setPosition("Device was deleted");
             }

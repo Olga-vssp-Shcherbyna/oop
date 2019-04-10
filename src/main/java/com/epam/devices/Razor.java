@@ -64,8 +64,9 @@ public class Razor extends Device {
         return this.id;
     }
 
+
     @Override
     public String toString(){
-        return this.getType()+" with power "+this.getPower()+", with id "+this.getId()+" and it is "+this.getState();
+        return this.getPosition()+" with power "+this.getPower()+" and it is "+this.getState();
     }
 }

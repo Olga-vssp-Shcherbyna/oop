@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Menu {
 
     public static void printMenu() throws IOException {
-        File f = new File("..\\src\\main\\resources\\Readme.txt");
+        File f = new File("D:\\Java_\\HomeDevices\\src\\main\\resources\\Readme.txt");
         BufferedReader fr = new BufferedReader(new FileReader(f));
         String line;
         while ((line = fr.readLine()) != null) System.out.println(line);
@@ -26,6 +26,7 @@ public class Menu {
             return false;
         }
     }
+
     public static void menu(House house) throws IOException {
         boolean run = true;
         System.out.println("Enter task please");
@@ -124,7 +125,7 @@ public class Menu {
                         if (RoomControlUnit.getRoomByName(house, roomName) != null) {
                             System.out.println("Enter device id");
                             int id = Integer.parseInt(reader.readLine());
-                            if (id > 0) {
+                            if (id >= 0) {
                                 System.out.println("Enter device type");
                                 String type = reader.readLine();
                                 if (Factory.typeChecker(type))

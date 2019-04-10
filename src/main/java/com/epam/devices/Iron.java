@@ -39,6 +39,7 @@ public class Iron extends Device {
         else System.out.println("Wrong state");
     }
 
+
     //getter for power value
     @Override
     public int getPower() {
@@ -65,6 +66,6 @@ public class Iron extends Device {
 
     @Override
     public String toString(){
-        return this.getType()+" with power "+this.getPower()+", with id "+this.getId()+" and it is "+this.getState();
+        return this.getPosition()+" with power "+this.getPower()+" and it is "+this.getState();
     }
 }

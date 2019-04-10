@@ -67,12 +67,12 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnNoDeviceMessage" time="0.001"/>
-  <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnNullDeviceMessage" time="0.005"/>
-  <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnNoneDeviceMessage" time="0.004"/>
+  <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnNullDeviceMessage" time="0.009"/>
+  <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnNoneDeviceMessage" time="0.001"/>
   <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnOverflowMessage" time="0"/>
   <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnNoRoomMessage" time="0.001"/>
   <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnNullMessage" time="0.003"/>
-  <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnMissingRoomMessage" time="0.001"/>
-  <testcase classname="com.epam.services.RoomControlUnitTest" name="nullCheck" time="0"/>
-  <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnNullRoomMessage" time="0.001"/>
+  <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnMissingRoomMessage" time="0"/>
+  <testcase classname="com.epam.services.RoomControlUnitTest" name="nullCheck" time="0.001"/>
+  <testcase classname="com.epam.services.RoomControlUnitTest" name="shouldReturnNullRoomMessage" time="0"/>
 </testsuite>

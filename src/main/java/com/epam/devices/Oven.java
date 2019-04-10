@@ -58,6 +58,7 @@ public class Oven extends Device {
         this.position=this.getType()+" "+position + " "+this.getId();
     }
 
+
     //getter for device id used in position setter
     @Override
     public int getId() {
@@ -66,6 +67,6 @@ public class Oven extends Device {
 
     @Override
     public String toString(){
-        return this.getType()+" with power "+this.getPower()+", with id "+this.getId()+" and it is "+this.getState();
+        return this.getPosition()+" with power "+this.getPower()+" and it is "+this.getState();
     }
 }

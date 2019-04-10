@@ -24,6 +24,7 @@ public class Room {
         this.devices = devices;
     }
 
+
     //getter for numberOfFreeSockets
     public int getNumberOfFreeSockets() {
         return numberOfFreeSockets;
@@ -38,7 +39,6 @@ public class Room {
     public void setName(String name) {
         this.name = name;
     }
-
     //setter for numberOfFreeSockets
     public void setNumberOfFreeSockets(int numberOfFreeSockets) {
         this.numberOfFreeSockets = numberOfFreeSockets;

@@ -19,4 +19,5 @@ public class FactoryTest {
     public void typeCheckTest(){
         assertFalse(typeChecker("type"));
     }
+
 }

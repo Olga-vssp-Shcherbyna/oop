@@ -72,6 +72,7 @@ public class HouseControlUnitTest {
         assertNull("Device was not null", device);
     }
 
+
     //getDeviceByPosition test
 
     @Test

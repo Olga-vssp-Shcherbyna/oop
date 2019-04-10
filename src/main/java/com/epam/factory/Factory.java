@@ -5,6 +5,7 @@ import com.epam.services.RoomControlUnit;
 
 public class Factory {
 
+
     private enum Type {
         PC, IRON, OVEN, RAZOR, KETTLE;
         public static boolean contains(String task){
@@ -15,7 +16,6 @@ public class Factory {
             return false;
         }
     }
-
     public static Device getDevice(String type, int power, String state){
         Device device = null;
         type = type.toUpperCase();
