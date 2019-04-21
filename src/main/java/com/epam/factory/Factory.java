@@ -1,55 +1,53 @@
 package com.epam.factory;
 
 import com.epam.devices.*;
-import com.epam.services.RoomControlUnit;
 
 public class Factory {
 
-
     private enum Type {
         PC, IRON, OVEN, RAZOR, KETTLE;
-        public static boolean contains(String task){
-            for (Type t : Type.values()){
+
+        public static boolean contains(String task) {
+            for (Type t : Type.values()) {
                 if (t.name().equals(task))
                     return true;
             }
             return false;
         }
     }
-    public static Device getDevice(String type, int power, String state){
+
+    public static Device getDevice(String type, int power, boolean isOn) {
         Device device = null;
         type = type.toUpperCase();
         Type TYPE;
         if (Type.contains(type)) {
             TYPE = Type.valueOf(type);
-            if (power > 0 && (state.equalsIgnoreCase("on") || state.equalsIgnoreCase("off"))) {
+            if (power > 0) {
                 switch (TYPE) {
                     case KETTLE:
-                        device = new Kettle(power, state);
+                        device = new Kettle(power, isOn);
                         break;
                     case RAZOR:
-                        device = new Razor(power, state);
+                        device = new Razor(power, isOn);
                         break;
                     case OVEN:
-                        device = new Oven(power, state);
+                        device = new Oven(power, isOn);
                         break;
                     case IRON:
-                        device = new Iron(power, state);
+                        device = new Iron(power, isOn);
                         break;
                     case PC:
-                        device = new PC(power, state);
+                        device = new PC(power, isOn);
                         break;
                 }
-            }
-            else
+            } else
                 System.out.println("Wrong initialization parameters");
-        }
-        else System.out.println("Wrong type");
+        } else System.out.println("Wrong type");
         return device;
     }
 
-        public static boolean typeChecker(String type){
-        return ("Iron".equalsIgnoreCase(type)||"Razor".equalsIgnoreCase(type)||"PC".equalsIgnoreCase(type)||
-                "Kettle".equalsIgnoreCase(type)||"Oven".equalsIgnoreCase(type));
-        }
+    public static boolean typeChecker(String type) {
+        return ("Iron".equalsIgnoreCase(type) || "Razor".equalsIgnoreCase(type) || "PC".equalsIgnoreCase(type) ||
+                "Kettle".equalsIgnoreCase(type) || "Oven".equalsIgnoreCase(type));
+    }
 }

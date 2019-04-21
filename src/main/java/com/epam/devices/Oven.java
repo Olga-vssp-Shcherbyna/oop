@@ -1,72 +1,59 @@
 package com.epam.devices;
 
 public class Oven extends Device {
-    private int power, id;
-    private String position, state;
+    private int power;
+    private int id;
+    private String position;
     private static int count = 0;
-    private static final String type = "OVEN";
+    private static final String TYPE = "OVEN";
+    private boolean isOn;
 
-    // constructor for class Oven
-    public Oven(int power, String state) {
+    public Oven(int power, boolean isOn) {
         this.power = power;
-        this.setState(state);
-        this.id=count;
+        this.isOn = isOn;
+        this.id = count;
         count++;
     }
 
-    //getter for state
     @Override
-    public boolean getBooleanState() {
-        if (state.equalsIgnoreCase("on")) return true;
-        else return false;
+    public boolean getState() {
+        return isOn;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    // setter for state
     @Override
-    public void setState(String state) {
-        if (state.equalsIgnoreCase("on")||state.equalsIgnoreCase("off")) this.state = state;
-        else System.out.println("Wrong state");
+    public void setState(boolean isOn) {
+        this.isOn = isOn;
     }
 
-    //getter for device type
     @Override
     public String getType() {
-        return type;
+        return TYPE;
     }
 
 
-
-    //getter for power value
     @Override
     public int getPower() {
         return this.power;
     }
 
-    // getter for position used in HouseControlUnit
     @Override
     public String getPosition() {
         return position;
     }
 
-    // setter for position used in RoomControlUnit
     @Override
-    public void setPosition(String position){
-        this.position=this.getType()+" "+position + " "+this.getId();
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-
-    //getter for device id used in position setter
     @Override
     public int getId() {
         return this.id;
     }
 
+
     @Override
-    public String toString(){
-        return this.getPosition()+" with power "+this.getPower()+" and it is "+this.getState();
+    public String toString() {
+        return this.getPosition() + " with power " + this.getPower() + " and it is on " + this.getState();
     }
 }

@@ -8,12 +8,12 @@ import static org.junit.Assert.*;
 public class FactoryTest {
     @Test
     public void shouldReturnWrongTypeMessage(){
-        assertNull(getDevice("type", 1, "on"));
+        assertNull(getDevice("type", 1, true));
     }
     @Test
     public void initializationParametersTest(){
-        assertNull(getDevice("pc", 0, "off"));
-        assertNull(getDevice("pc", 20, "oll"));
+        assertNull(getDevice("pc", 0, false));
+        assertNull(getDevice("pc", 20, true));
     }
     @Test
     public void typeCheckTest(){

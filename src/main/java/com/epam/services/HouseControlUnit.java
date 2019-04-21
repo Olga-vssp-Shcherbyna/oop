@@ -1,122 +1,175 @@
 package com.epam.services;
 
 import com.epam.devices.Device;
-import com.epam.house.*;
+import com.epam.house.House;
+import com.epam.house.Room;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
+
+import static com.epam.services.RoomControlUnit.roomSetupValidation;
 
 public class HouseControlUnit {
 
 
-
-    //method for room addition
+    /**
+     * This method is used for adding new room to house
+     *
+     * @param house
+     * @param numberOfFreeSockets
+     * @param name
+     * @return
+     */
     public static Room addRoom(House house, int numberOfFreeSockets, String name) {
-        if (RoomControlUnit.getRoomByName(house, name)==null) {
-            if (checkName(name)) {
-                if (numberOfFreeSockets > 0) {
-                    Room room = new Room(numberOfFreeSockets, name);
-                    house.getRooms().add(room);
-                    house.setTotalPower(house.getTotalPower() + room.getRoomPower());
-                 //   houseStatus(house);
-                    return room;
-                }
-                else {System.out.println("Sorry, wrong number of free sockets"); return null;}
-            }
-            else {System.out.println("Sorry, invalid name"); return null;}
-        }
-        else
-            {System.out.println("Sorry, this room already exists. Please, try again");
-            return null;}
+        if (roomSetupValidation(house, numberOfFreeSockets, name)) {
+            house.getRooms().add(new Room(numberOfFreeSockets, name));
+            return new Room(numberOfFreeSockets, name);
+        } else return null;
     }
 
 
-    //method for room removing
-    public static Room deleteRoom(House house, String name){
-        Room r = null;
-        for (Room room:house.getRooms()) {
-            if (room.getName().equalsIgnoreCase(name)) {
-                r=room;}
-        }
+    /**
+     * This method is used for removing room from house
+     *
+     * @param house
+     * @param name
+     * @return
+     */
+    public static Room deleteRoom(House house, String name) {
+        Room r = getRoomByName(house, name);
         if (r != null) {
             house.getRooms().remove(r);
-            house.setTotalPower(house.getTotalPower()-r.getRoomPower());
-        }
-        else
+            powerDecrement(house, r);
+        } else
             System.out.println("Sorry, there is no such room. Please, try again");
         return r;
     }
 
-    //method for house status display
-    public static void houseStatus(House house){
-        System.out.println("In house there are " + house.getRooms().size()
-                + " rooms and its total power is " + house.getTotalPower());
+    /**
+     * This is util method for house total power decreasing when some room is deleted from it
+     *
+     * @param house
+     * @param r
+     */
+    private static void powerDecrement(House house, Room r) {
+        house.setTotalPower(house.getTotalPower() - r.getRoomPower());
     }
 
-    //method for device search by parameters: power borders, state (on/off), type
-    public static Device findDevice(House house, int power1, int power2, String state, String type){
+
+    /**
+     * This method is used to get room by its name
+     *
+     * @param house
+     * @param name
+     * @return
+     */
+    public static Room getRoomByName(House house, String name) {
+        for (Room room : house.getRooms()) {
+            if (room.getName().equalsIgnoreCase(name)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This method is used to get info about rooms in the house and total power of active devices
+     *
+     * @param house
+     */
+    public static void houseStatus(House house) {
+        System.out.printf("In house there are %d rooms and its total power is %d \n", house.getRooms().size(), house.getTotalPower());
+    }
+
+    /**
+     * This method is used for search device by parameters
+     *
+     * @param house
+     * @param power1
+     * @param power2
+     * @param state
+     * @param type
+     * @return
+     */
+    public static Device findDevice(House house, int power1, int power2, String state, String type) {
         String position;
         Device deviceReturnable = null;
-        ArrayList<Device> devices = getAllDevices(house);
-        if (power1<power2&&power2>=0&&power1>=0)
-            for (Device device:devices) {
+        List<Device> devices = getAllDevices(house);
+        if (power1 < power2 && power2 >= 0 && power1 >= 0) {
+            for (Device device : devices) {
                 if ((device.getPower() > power1) && (device.getPower() < power2) &&
-                        (device.getState().equalsIgnoreCase(state)) && (device.getType().equalsIgnoreCase(type))) {
+                        (device.getState() == Boolean.parseBoolean(state)) && (device.getType().equalsIgnoreCase(type))) {
                     position = device.getPosition();
                     System.out.println(position);
                     deviceReturnable = device;
                 }
             }
-        else System.out.println("Wrong power range");
+        } else System.out.println("Wrong power range");
         return deviceReturnable;
     }
-    //method for getting device by position
+
+
+    /**
+     * This method is used for getting device by its position
+     *
+     * @param house
+     * @param position
+     * @return
+     */
     public static Device getDeviceByPosition(House house, String position) {
         Device device = null;
-        for (Device deviceIterable : getAllDevices(house))
-            if (deviceIterable.getPosition().equalsIgnoreCase(position))
+        for (Device deviceIterable : getAllDevices(house)) {
+            if (deviceIterable.getPosition().equalsIgnoreCase(position)) {
                 device = deviceIterable;
-            return device;
+            }
+        }
+        return device;
     }
 
 
-    //method for device sort by power
-    public static ArrayList<Device> sortByPower(House house){
-        ArrayList<Device> devicesInHouse = getAllDevices(house);
-            Collections.sort(devicesInHouse, new Comparator<Device>() {
-                public int compare(Device a, Device b) {
-                    if (a.getPower()>b.getPower()) return 1;
-                    else if (a.getPower()<b.getPower()) return -1;
-                    else return 0;
-                }
-            });
+    /**
+     * This is sorting method
+     *
+     * @param house
+     * @return
+     */
+    public static List<Device> sortByPower(House house) {
+        List<Device> devicesInHouse = new ArrayList<>(getAllDevices(house));
+        Collections.sort(devicesInHouse, (a, b) -> {
+            if (a.getPower() > b.getPower()) return 1;
+            else if (a.getPower() < b.getPower()) return -1;
+            else return 0;
+        });
         printDevices(devicesInHouse);
         return devicesInHouse;
     }
 
-    public static void printDevices (ArrayList<Device> devices){
+    /**
+     * This method is used for nice display of devices in the house
+     *
+     * @param devices
+     */
+    public static void printDevices(List<Device> devices) {
         System.out.println("[ ");
-        for (Device device : devices){
+        for (Device device : devices) {
             System.out.println(device.toString());
         }
         System.out.println(" ]");
     }
 
-    public static ArrayList<Device> getAllDevices(House house){
-        ArrayList<Device> devicesInHouse = new ArrayList<Device>();
-        for (Room room:house.getRooms()) {
-            devicesInHouse.addAll(room.getDevices());
+    /**
+     * This method is used for getting list of devices
+     *
+     * @param house
+     * @return
+     */
+    public static List<Device> getAllDevices(House house) {
+        List<Device> devices = new ArrayList<>();
+        for (Room room : house.getRooms()) {
+            devices.addAll(room.getDevices());
         }
-        return devicesInHouse;
+        return devices;
     }
 
-    public static boolean checkName(String input){
-        Pattern p = Pattern.compile("[A-Z]{1}[a-z]{2,}");
-        Matcher m = p.matcher(input);
-        return m.matches();
-    }
 }

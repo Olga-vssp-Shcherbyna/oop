@@ -1,43 +1,42 @@
 package com.epam.house;
 
-import com.epam.devices.Device;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
-public class House{
-        private ArrayList <Room> rooms;
-        private int totalPower = 0;
+public class House {
+    private List<Room> rooms;
+    private int totalPower = 0;
 
-        private static House INSTANCE;
+    private static House INSTANCE;
 
-        public static House getInstance(ArrayList<Room> rooms){
-            if (INSTANCE==null)
-                synchronized (House.class){
-                if (INSTANCE==null)
+    public static House getInstance(ArrayList<Room> rooms) {
+        if (INSTANCE == null) {
+            synchronized (House.class) {
+                if (INSTANCE == null)
                     INSTANCE = new House(rooms);
-                }
-            return INSTANCE;
             }
-
-
-        //getter for list of rooms in house
-        public ArrayList<Room> getRooms() {
-            return rooms;
         }
+        return INSTANCE;
+    }
 
-        //getter for total power consumption
-        public int getTotalPower() {
-            return totalPower;
-        }
+    public List<Room> getRooms() {
+        return rooms;
+    }
 
-        //setter for totalPower
-        public void setTotalPower(int totalPower) {
-            this.totalPower = totalPower;
-        }
+    public int getTotalPower() {
+        return totalPower;
+    }
+
+    public void setTotalPower(int totalPower) {
+        this.totalPower = totalPower;
+    }
 
     private House(ArrayList<Room> rooms) {
         this.rooms = rooms;
     }
 
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
+    }
 }
 
