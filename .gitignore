@@ -10,6 +10,8 @@
 .idea/**/shelf
 .idea/
 *.plantuml
+/lib/*
+*.iml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -35,7 +37,7 @@ cmake-build-release/
 *.iws
 
 # IntelliJ
-out/
+out/git push --force
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -55,3 +57,4 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+/target/*
