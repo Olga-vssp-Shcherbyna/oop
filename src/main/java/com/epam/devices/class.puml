@@ -1,0 +1,7 @@
+@startuml
+Device <- Iron
+Device <- Kettle
+Device <- Oven
+Device <- PC
+Device <- Razor
+@enduml
